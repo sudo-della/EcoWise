@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @Data
 
-public class RecyclingTip {
+public class RecyclingTipModel {
 
     @Setter
     @Getter
@@ -26,15 +26,15 @@ public class RecyclingTip {
     private Long id;
     private String tip;
 
-    public RecyclingTip() {
+    public RecyclingTipModel() {
     }
 
-    public RecyclingTip(Long id, String name, String description) {
+    public RecyclingTipModel(Long id, String name, String description) {
         this.id = id;
         this.tip = description;
     }
 
-    public RecyclingTip(String tip) {
+    public RecyclingTipModel(String tip) {
         this.tip = tip;
     }
 

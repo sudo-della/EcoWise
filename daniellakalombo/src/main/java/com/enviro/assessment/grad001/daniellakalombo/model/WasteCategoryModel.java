@@ -8,7 +8,7 @@ import lombok.Setter;
 @Data
 
 
-public class WasteCategory {
+public class WasteCategoryModel {
 
     @Setter
     @Id
@@ -24,20 +24,19 @@ public class WasteCategory {
 
     @Column(columnDefinition = "int8")
     private Long id;
-
     private String name;
     private String description;
 
-    public WasteCategory() {
+    public WasteCategoryModel() {
     }
 
-    public WasteCategory(Long id, String name, String description) {
+    public WasteCategoryModel(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public WasteCategory(String name, String description) {
+    public WasteCategoryModel(String name, String description) {
         this.name = name;
         this.description = description;
     }
