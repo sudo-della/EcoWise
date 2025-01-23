@@ -9,7 +9,7 @@ import lombok.Setter;
 @Table
 
 
-public class DisposalGuideline {
+public class DisposalGuidelineModel {
 
     @Setter
     @Id
@@ -29,16 +29,16 @@ public class DisposalGuideline {
     private String category;
     private String guidelines;
 
-    public DisposalGuideline() {
+    public DisposalGuidelineModel() {
     }
 
-    public DisposalGuideline(Long id, String category, String guidelines) {
+    public DisposalGuidelineModel(Long id, String category, String guidelines) {
         this.id = id;
         this.category = category;
         this.guidelines= guidelines;
     }
 
-    public DisposalGuideline(String category, String guidelines) {
+    public DisposalGuidelineModel(String category, String guidelines) {
         this.category = category;
         this.guidelines = guidelines;
     }
