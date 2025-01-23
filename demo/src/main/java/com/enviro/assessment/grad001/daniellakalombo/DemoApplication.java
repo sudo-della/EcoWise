@@ -1,9 +1,8 @@
-package com.example.demo;
+package com.enviro.assessment.grad001.daniellakalombo;
 
 //import com.example.demo.student.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringBootApplication
