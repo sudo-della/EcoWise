@@ -1,6 +1,6 @@
 package com.enviro.assessment.grad001.daniellakalombo.controller;
 
-import com.enviro.assessment.grad001.daniellakalombo.model.WasteCategory;
+import com.enviro.assessment.grad001.daniellakalombo.model.WasteCategoryModel;
 import com.enviro.assessment.grad001.daniellakalombo.service.WasteCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,13 +17,13 @@ public class WasteCategoryController {
     private WasteCategoryService wasteCategoryService;
 
     @GetMapping
-    public ResponseEntity<List<WasteCategory>> getAllCategories() {
+    public ResponseEntity<List<WasteCategoryModel>> getAllCategories() {
         return ResponseEntity.ok(wasteCategoryService.getAllCategories());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WasteCategory> getCategoryById(@PathVariable Long id) {
-        WasteCategory category = wasteCategoryService.getCategoryById(id);
+    public ResponseEntity<WasteCategoryModel> getCategoryById(@PathVariable Long id) {
+        WasteCategoryModel category = wasteCategoryService.getCategoryById(id);
         if (category != null) {
             return ResponseEntity.ok(category);
         } else {
@@ -32,14 +32,14 @@ public class WasteCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<WasteCategory> createCategory(@RequestBody WasteCategory category) {
+    public ResponseEntity<WasteCategoryModel> createCategory(@RequestBody WasteCategoryModel category) {
         return ResponseEntity.status(HttpStatus.CREATED).body(wasteCategoryService.createCategory(category));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WasteCategory> updateCategory(@PathVariable Long id, @RequestBody WasteCategory category) {
+    public ResponseEntity<WasteCategoryModel> updateCategory(@PathVariable Long id, @RequestBody WasteCategoryModel category) {
         category.setId(id); // Set the ID explicitly
-        WasteCategory updatedCategory = wasteCategoryService.updateCategory(category);
+        WasteCategoryModel updatedCategory = wasteCategoryService.updateCategory(category);
         return ResponseEntity.ok(updatedCategory);
     }
 
