@@ -2,27 +2,22 @@ package com.enviro.assessment.grad001.daniellakalombo.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Setter;
 
 @Entity
 @Data
-
-
 public class WasteCategoryModel {
 
-    @Setter
     @Id
     @SequenceGenerator(
-            name = "disposal_guideline_sequence",
-            sequenceName = "disposal_guideline_sequence",
+            name = "waste_category_sequence",
+            sequenceName = "waste_category_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "disposal_guideline_sequence"
+            generator = "waste_category_sequence"
     )
 
-    @Column(columnDefinition = "int8")
     private Long id;
     private String name;
     private String description;
@@ -43,10 +38,10 @@ public class WasteCategoryModel {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "WasteCategoryModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", email='" + description + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

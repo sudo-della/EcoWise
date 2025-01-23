@@ -14,13 +14,13 @@ public class DisposalGuidelineConfig {
     CommandLineRunner commandLineRunner(DisposalGuidelineRepo repository){
         return args -> {
             DisposalGuidelineModel guidelineModel1 = new DisposalGuidelineModel(
-                    "category",
-                    "guidelines"
+                    "Plastic",
+                    "Separate plastic waste into recyclable and non-recyclable."
             );
 
             DisposalGuidelineModel guidelineModel2 = new DisposalGuidelineModel(
-                    "category 2",
-                    "guidelines 2"
+                    "Glass",
+                    "Dispose of glass in the designated glass bins."
             );
 
             repository.saveAll(

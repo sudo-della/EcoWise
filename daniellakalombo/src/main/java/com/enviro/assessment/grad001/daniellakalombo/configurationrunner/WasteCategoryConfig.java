@@ -14,13 +14,13 @@ public class WasteCategoryConfig {
     CommandLineRunner commandLineRunner(WasteCategoryRepo repository){
         return args -> {
             WasteCategoryModel wasteCategory1 = new WasteCategoryModel(
-                    "waste name",
-                    "description"
+                    "Plastic",
+                    "Materials made of plastic, such as bottles and containers."
             );
 
             WasteCategoryModel wasteCategory2 = new WasteCategoryModel(
-                    "waste name",
-                    "description"
+                    "Organic",
+                    "Food scraps and other biodegradable materials."
             );
 
             repository.saveAll(

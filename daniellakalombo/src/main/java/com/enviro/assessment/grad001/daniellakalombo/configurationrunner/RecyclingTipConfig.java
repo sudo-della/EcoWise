@@ -15,11 +15,11 @@ public class RecyclingTipConfig {
     CommandLineRunner commandLineRunner(RecyclingTipRepo repository){
         return args -> {
             RecyclingTipModel tip1 = new RecyclingTipModel(
-                    "tip"
+                    "Always rinse plastic containers before recycling."
             );
 
             RecyclingTipModel tip2 = new RecyclingTipModel(
-                    "tip 2"
+                    "Flatten cardboard boxes to save space in the recycling bin."
             );
 
             repository.saveAll(
