@@ -1,58 +1,54 @@
 package com.enviro.assessment.grad001.daniellakalombo.controller;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import com.enviro.assessment.grad001.daniellakalombo.model.RecyclingTipModel;
+import com.enviro.assessment.grad001.daniellakalombo.model.WasteCategoryModel;
+import com.enviro.assessment.grad001.daniellakalombo.service.RecyclingTipService;
+import com.enviro.assessment.grad001.daniellakalombo.service.WasteCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-@Entity
-@Data
+@RestController
+@RequestMapping("/api/tips")
+public class RecyclingTipController {
 
-public class RecyclingTipModel {
+    @Autowired
+    private RecyclingTipService recyclingTipService;
 
-    @Setter
-    @Getter
-    @Id
-    @SequenceGenerator(
-            name = "recycling_tip_sequence",
-            sequenceName = "recycling_tip_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "recycling_tip_sequence"
-    )
-
-    @Column(columnDefinition = "int8")
-    private Long id;
-    private String tip;
-
-    public RecyclingTipModel() {
+    @GetMapping
+    public ResponseEntity<List<RecyclingTipModel>> getAllCategories() {
+        return ResponseEntity.ok(recyclingTipService.getAllTips());
     }
 
-    public RecyclingTipModel(Long id, String name, String description) {
-        this.id = id;
-        this.tip = description;
+    @GetMapping("/{id}")
+    public ResponseEntity<RecyclingTipModel> getCategoryById(@PathVariable Long id) {
+        RecyclingTipModel category = recyclingTipService.getTipById(id);
+        if (category != null) {
+            return ResponseEntity.ok(category);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    public RecyclingTipModel(String tip) {
-        this.tip = tip;
+    @PostMapping
+    public ResponseEntity<RecyclingTipModel> createCategory(@RequestBody RecyclingTipModel category) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(recyclingTipService.createTip(category));
     }
 
-    public Long getTip() {
-        return id;
+    @PutMapping("/{id}")
+    public ResponseEntity<RecyclingTipModel> updateCategory(@PathVariable Long id, @RequestBody RecyclingTipModel category) {
+        category.setId(id); // Set the ID explicitly
+        RecyclingTipModel updatedCategory = recyclingTipService.updateTip(category);
+        return ResponseEntity.ok(updatedCategory);
     }
 
-    public void setTip(Long id) {
-        this.id = id;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTip(@PathVariable Long id) {
+        recyclingTipService.deleteTip(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", tip='" + tip + '\'' +
-                '}';
-    }
 }
