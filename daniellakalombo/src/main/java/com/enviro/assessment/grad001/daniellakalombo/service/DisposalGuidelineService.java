@@ -1,7 +1,7 @@
 package com.enviro.assessment.grad001.daniellakalombo.service;
 
-import com.enviro.assessment.grad001.daniellakalombo.model.DisposalGuideline;
-import com.enviro.assessment.grad001.daniellakalombo.repository.DisposalGuidelineRepository;
+import com.enviro.assessment.grad001.daniellakalombo.model.DisposalGuidelineModel;
+import com.enviro.assessment.grad001.daniellakalombo.repository.DisposalGuidelineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,26 +10,30 @@ import java.util.List;
 @Service
 public class DisposalGuidelineService {
 
+    private final DisposalGuidelineRepo disposalGuidelineRepo;
+
     @Autowired
-    private DisposalGuidelineRepository disposalGuidelineRepository;
-
-    public List<DisposalGuideline> getAllGuidelines() {
-        return disposalGuidelineRepository.findAll();
+    public DisposalGuidelineService(DisposalGuidelineRepo disposalGuidelineRepo){
+        this.disposalGuidelineRepo = disposalGuidelineRepo;
     }
 
-    public DisposalGuideline getGuidelineById(Long id) {
-        return disposalGuidelineRepository.findById(id).orElse(null);
+    public List<DisposalGuidelineModel> getAllGuidelines() {
+        return disposalGuidelineRepo.findAll();
     }
 
-    public DisposalGuideline createGuideline(DisposalGuideline guideline) {
-        return disposalGuidelineRepository.save(guideline);
+    public DisposalGuidelineModel getGuidelineById(Long id) {
+        return disposalGuidelineRepo.findById(id).orElse(null);
     }
 
-    public DisposalGuideline updateGuideline(DisposalGuideline guideline) {
-        return disposalGuidelineRepository.save(guideline);
+    public DisposalGuidelineModel createGuideline(DisposalGuidelineModel guideline) {
+        return disposalGuidelineRepo.save(guideline);
+    }
+
+    public DisposalGuidelineModel updateGuideline(DisposalGuidelineModel guideline) {
+        return disposalGuidelineRepo.save(guideline);
     }
 
     public void deleteGuideline(Long id) {
-        disposalGuidelineRepository.deleteById(id);
+        disposalGuidelineRepo.deleteById(id);
     }
 }

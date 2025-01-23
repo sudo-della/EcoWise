@@ -1,7 +1,8 @@
 package com.enviro.assessment.grad001.daniellakalombo.service;
 
-import com.enviro.assessment.grad001.daniellakalombo.model.RecyclingTip;
-import com.enviro.assessment.grad001.daniellakalombo.repository.RecyclingTipRepository;
+import com.enviro.assessment.grad001.daniellakalombo.model.RecyclingTipModel;
+import com.enviro.assessment.grad001.daniellakalombo.repository.DisposalGuidelineRepo;
+import com.enviro.assessment.grad001.daniellakalombo.repository.RecyclingTipRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,26 +11,30 @@ import java.util.List;
 @Service
 public class RecyclingTipService {
 
+    private final RecyclingTipRepo recyclingTipRepo;
+
     @Autowired
-    private RecyclingTipRepository recyclingTipRepository;
-
-    public List<RecyclingTip> getAllTips() {
-        return recyclingTipRepository.findAll();
+    public RecyclingTipService(RecyclingTipRepo recyclingTipRepo){
+        this.recyclingTipRepo = recyclingTipRepo;
     }
 
-    public RecyclingTip getTipById(Long id) {
-        return recyclingTipRepository.findById(id).orElse(null);
+    public List<RecyclingTipModel> getAllTips() {
+        return recyclingTipRepo.findAll();
     }
 
-    public RecyclingTip createTip(RecyclingTip tip) {
-        return recyclingTipRepository.save(tip);
+    public RecyclingTipModel getTipById(Long id) {
+        return recyclingTipRepo.findById(id).orElse(null);
     }
 
-    public RecyclingTip updateTip(RecyclingTip tip) {
-        return recyclingTipRepository.save(tip);
+    public RecyclingTipModel createTip(RecyclingTipModel tip) {
+        return recyclingTipRepo.save(tip);
+    }
+
+    public RecyclingTipModel updateTip(RecyclingTipModel tip) {
+        return recyclingTipRepo.save(tip);
     }
 
     public void deleteTip(Long id) {
-        recyclingTipRepository.deleteById(id);
+        recyclingTipRepo.deleteById(id);
     }
 }

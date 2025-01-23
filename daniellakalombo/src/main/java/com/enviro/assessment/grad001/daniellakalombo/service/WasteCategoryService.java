@@ -1,7 +1,8 @@
 package com.enviro.assessment.grad001.daniellakalombo.service;
 
-import com.enviro.assessment.grad001.daniellakalombo.model.WasteCategory;
-import com.enviro.assessment.grad001.daniellakalombo.repository.WasteCategoryRepository;
+import com.enviro.assessment.grad001.daniellakalombo.model.WasteCategoryModel;
+import com.enviro.assessment.grad001.daniellakalombo.repository.RecyclingTipRepo;
+import com.enviro.assessment.grad001.daniellakalombo.repository.WasteCategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,26 +11,30 @@ import java.util.List;
 @Service
 public class WasteCategoryService {
 
+    private final WasteCategoryRepo wasteCategoryRepo;
+
     @Autowired
-    private WasteCategoryRepository wasteCategoryRepository;
-
-    public List<WasteCategory> getAllCategories() {
-        return wasteCategoryRepository.findAll();
+    public WasteCategoryService(WasteCategoryRepo wasteCategoryRepo){
+        this.wasteCategoryRepo = wasteCategoryRepo;
     }
 
-    public WasteCategory getCategoryById(Long id) {
-        return wasteCategoryRepository.findById(id).orElse(null);
+    public List<WasteCategoryModel> getAllCategories() {
+        return wasteCategoryRepo.findAll();
     }
 
-    public WasteCategory createCategory(WasteCategory category) {
-        return wasteCategoryRepository.save(category);
+    public WasteCategoryModel getCategoryById(Long id) {
+        return wasteCategoryRepo.findById(id).orElse(null);
     }
 
-    public WasteCategory updateCategory(WasteCategory category) {
-        return wasteCategoryRepository.save(category);
+    public WasteCategoryModel createCategory(WasteCategoryModel category) {
+        return wasteCategoryRepo.save(category);
+    }
+
+    public WasteCategoryModel updateCategory(WasteCategoryModel category) {
+        return wasteCategoryRepo.save(category);
     }
 
     public void deleteCategory(Long id) {
-        wasteCategoryRepository.deleteById(id);
+        wasteCategoryRepo.deleteById(id);
     }
 }
