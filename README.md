@@ -1,1 +1,1 @@
-# springboot_application
+# EcoWise
