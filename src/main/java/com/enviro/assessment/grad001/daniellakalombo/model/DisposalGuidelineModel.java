@@ -1,57 +1,46 @@
 package com.enviro.assessment.grad001.daniellakalombo.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
-@Getter
+@Data
 @Entity
-@Table
-
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "Disposal_guidelines")
 public class DisposalGuidelineModel {
 
-    @Setter
     @Id
-    @SequenceGenerator(
-            name = "model_sequence",
-            sequenceName = "model_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "model_sequence"
-    )
-
-    @Column(columnDefinition = "int8")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Setter
-    private String category;
+
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max = 100, message = "Name must have less than 100 characters")
+    private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private WasteCategoryModel category;
+
+    @NotBlank(message = "Guidelines cannot be empty")
+    @Size(max = 250, message = "Guidelines must have less than 250 characters")
     private String guidelines;
 
-    public DisposalGuidelineModel() {
-    }
-
-    public DisposalGuidelineModel(Long id, String category, String guidelines) {
-        this.id = id;
-        this.category = category;
-        this.guidelines= guidelines;
-    }
-
-    public DisposalGuidelineModel(String category, String guidelines) {
+    public DisposalGuidelineModel(String name,WasteCategoryModel category, String guidelines) {
+        this.name = name;
         this.category = category;
         this.guidelines = guidelines;
     }
 
-    public void setGuidelines(String guidelines) {
-        this.category = guidelines;
-    }
-
     @Override
     public String toString() {
-        return "Student{" +
+        return "DisposalGuidelineModel{" +
                 "id=" + id +
-                ", category='" + category + '\'' +
+                ", name='" + name + '\'' +
+                ", category=" + category +
                 ", guidelines='" + guidelines + '\'' +
                 '}';
     }

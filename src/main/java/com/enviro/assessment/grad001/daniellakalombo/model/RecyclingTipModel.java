@@ -1,55 +1,43 @@
 package com.enviro.assessment.grad001.daniellakalombo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 
-@Entity
 @Data
-
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "Recycling_tips")
 public class RecyclingTipModel {
 
-    @Setter
-    @Getter
     @Id
-    @SequenceGenerator(
-            name = "recycling_tip_sequence",
-            sequenceName = "recycling_tip_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "recycling_tip_sequence"
-    )
-
-    @Column(columnDefinition = "int8")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max = 100, message = "Name must have less than 100 characters")
+    private String name;
+
+    @NotBlank(message = "Tips cannot be empty")
+    @Size(max = 250, message = "Tips must have less than 250 characters")
     private String tip;
 
-    public RecyclingTipModel() {
-    }
 
-    public RecyclingTipModel(Long id, String name, String description) {
-        this.id = id;
-        this.tip = description;
-    }
-
-    public RecyclingTipModel(String tip) {
+    public RecyclingTipModel(String name,String tip) {
+        this.name = name;
         this.tip = tip;
     }
 
-    public Long getTip() {
-        return id;
-    }
-
-    public void setTip(Long id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "RecyclingTipModel{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", tip='" + tip + '\'' +
                 '}';
     }

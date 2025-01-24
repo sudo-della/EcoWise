@@ -1,35 +1,33 @@
 package com.enviro.assessment.grad001.daniellakalombo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "Waste_categories")
 public class WasteCategoryModel {
 
     @Id
-    @SequenceGenerator(
-            name = "waste_category_sequence",
-            sequenceName = "waste_category_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "waste_category_sequence"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max = 100, message = "Name must have less than 100 characters")
     private String name;
+
+
+    @NotBlank(message = "Description cannot be empty")
+    @Size(max = 250, message = "Description must have less than 250 characters")
     private String description;
-
-    public WasteCategoryModel() {
-    }
-
-    public WasteCategoryModel(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
 
     public WasteCategoryModel(String name, String description) {
         this.name = name;
