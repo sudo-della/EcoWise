@@ -19,35 +19,27 @@ public class DisposalGuidelineController {
     private DisposalGuidelineService disposalGuidelineService;
 
     @GetMapping
-    public ResponseEntity<List<DisposalGuidelineModel>> getAllCategories() {
-        return ResponseEntity.ok(disposalGuidelineService.getAllGuidelines());
+    public List<DisposalGuidelineModel> getAllGuidelines() {
+        return disposalGuidelineService.getAllGuidelines();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DisposalGuidelineModel> getCategoryById(@PathVariable Long id) {
-        DisposalGuidelineModel category = disposalGuidelineService.getGuidelineById(id);
-        if (category != null) {
-            return ResponseEntity.ok(category);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public DisposalGuidelineModel getGuidelineById(@PathVariable Long id) {
+        return disposalGuidelineService.getGuidelineById(id);
     }
 
     @PostMapping
-    public ResponseEntity<DisposalGuidelineModel> createCategory(@RequestBody DisposalGuidelineModel category) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(disposalGuidelineService.createGuideline(category));
+    public DisposalGuidelineModel createGuideline(@RequestBody DisposalGuidelineModel guidelines) {
+        return disposalGuidelineService.createGuideline(guidelines);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DisposalGuidelineModel> updateCategory(@PathVariable Long id, @RequestBody DisposalGuidelineModel category) {
-        category.setId(id); // Set the ID explicitly
-        DisposalGuidelineModel updatedCategory = disposalGuidelineService.updateGuideline(category);
-        return ResponseEntity.ok(updatedCategory);
+    public DisposalGuidelineModel updateGuideline(@PathVariable Long id, @RequestBody DisposalGuidelineModel guidelines) {
+        return disposalGuidelineService.updateGuideline(id, guidelines);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGuideline(@PathVariable Long id) {
+    public void deleteGuideline(@PathVariable Long id) {
         disposalGuidelineService.deleteGuideline(id);
-        return ResponseEntity.noContent().build();
     }
 }

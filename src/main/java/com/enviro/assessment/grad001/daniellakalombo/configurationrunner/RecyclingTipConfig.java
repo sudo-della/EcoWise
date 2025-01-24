@@ -14,16 +14,18 @@ public class RecyclingTipConfig {
     @Bean
     CommandLineRunner commandLineRunner(RecyclingTipRepo repository){
         return args -> {
-            RecyclingTipModel tip1 = new RecyclingTipModel(
+            RecyclingTipModel plasticRecyclingTip = new RecyclingTipModel(
+                    "Plastic Recycling Tip",
                     "Always rinse plastic containers before recycling."
             );
 
-            RecyclingTipModel tip2 = new RecyclingTipModel(
+            RecyclingTipModel glassRecyclingTip = new RecyclingTipModel(
+                    "Glass Recycling Tip",
                     "Flatten cardboard boxes to save space in the recycling bin."
             );
 
             repository.saveAll(
-                    List.of(tip1, tip2)
+                    List.of(plasticRecyclingTip, glassRecyclingTip)
             );
         };
     }

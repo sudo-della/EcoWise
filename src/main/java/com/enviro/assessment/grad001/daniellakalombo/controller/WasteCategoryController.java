@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.daniellakalombo.controller;
 
+import com.enviro.assessment.grad001.daniellakalombo.model.RecyclingTipModel;
 import com.enviro.assessment.grad001.daniellakalombo.model.WasteCategoryModel;
 import com.enviro.assessment.grad001.daniellakalombo.service.WasteCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,36 +18,28 @@ public class WasteCategoryController {
     private WasteCategoryService wasteCategoryService;
 
     @GetMapping
-    public ResponseEntity<List<WasteCategoryModel>> getAllCategories() {
-        return ResponseEntity.ok(wasteCategoryService.getAllCategories());
+    public List<WasteCategoryModel> getAllCategories() {
+        return wasteCategoryService.getAllCategories();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WasteCategoryModel> getCategoryById(@PathVariable Long id) {
-        WasteCategoryModel category = wasteCategoryService.getCategoryById(id);
-        if (category != null) {
-            return ResponseEntity.ok(category);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public WasteCategoryModel getCategoryById(@PathVariable Long id) {
+        return wasteCategoryService.getCategoryById(id);
     }
 
     @PostMapping
-    public ResponseEntity<WasteCategoryModel> createCategory(@RequestBody WasteCategoryModel category) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(wasteCategoryService.createCategory(category));
+    public WasteCategoryModel createCategory(@RequestBody WasteCategoryModel category) {
+        return wasteCategoryService.createCategory(category);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WasteCategoryModel> updateCategory(@PathVariable Long id, @RequestBody WasteCategoryModel category) {
-        category.setId(id); // Set the ID explicitly
-        WasteCategoryModel updatedCategory = wasteCategoryService.updateCategory(category);
-        return ResponseEntity.ok(updatedCategory);
+    public WasteCategoryModel updateCategory(@PathVariable Long id, @RequestBody WasteCategoryModel category) {
+        return wasteCategoryService.updateCategory(id, category);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+    public void deleteCategory(@PathVariable Long id) {
         wasteCategoryService.deleteCategory(id);
-        return ResponseEntity.noContent().build();
     }
 
 }

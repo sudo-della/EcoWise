@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WasteCategoryRepo extends JpaRepository<WasteCategoryModel, Long> {
 
+    Long id(Long id);
 }

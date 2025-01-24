@@ -1,5 +1,6 @@
 package com.enviro.assessment.grad001.daniellakalombo.controller;
 
+import com.enviro.assessment.grad001.daniellakalombo.model.DisposalGuidelineModel;
 import com.enviro.assessment.grad001.daniellakalombo.model.RecyclingTipModel;
 import com.enviro.assessment.grad001.daniellakalombo.model.WasteCategoryModel;
 import com.enviro.assessment.grad001.daniellakalombo.service.RecyclingTipService;
@@ -19,36 +20,28 @@ public class RecyclingTipController {
     private RecyclingTipService recyclingTipService;
 
     @GetMapping
-    public ResponseEntity<List<RecyclingTipModel>> getAllCategories() {
-        return ResponseEntity.ok(recyclingTipService.getAllTips());
+    public List<RecyclingTipModel> getAllTips() {
+        return recyclingTipService.getAllTips();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RecyclingTipModel> getCategoryById(@PathVariable Long id) {
-        RecyclingTipModel category = recyclingTipService.getTipById(id);
-        if (category != null) {
-            return ResponseEntity.ok(category);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public RecyclingTipModel getTipById(@PathVariable Long id) {
+        return recyclingTipService.getTipById(id);
     }
 
     @PostMapping
-    public ResponseEntity<RecyclingTipModel> createCategory(@RequestBody RecyclingTipModel category) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(recyclingTipService.createTip(category));
+    public RecyclingTipModel createTip(@RequestBody RecyclingTipModel tip) {
+        return recyclingTipService.createTip(tip);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RecyclingTipModel> updateCategory(@PathVariable Long id, @RequestBody RecyclingTipModel category) {
-        category.setId(id); // Set the ID explicitly
-        RecyclingTipModel updatedCategory = recyclingTipService.updateTip(category);
-        return ResponseEntity.ok(updatedCategory);
+    public RecyclingTipModel updateTip(@PathVariable Long id, @RequestBody RecyclingTipModel tip) {
+        return recyclingTipService.updateTip(id, tip);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTip(@PathVariable Long id) {
+    public void deleteTip(@PathVariable Long id) {
         recyclingTipService.deleteTip(id);
-        return ResponseEntity.noContent().build();
     }
 
 }
